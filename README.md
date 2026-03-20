@@ -114,7 +114,7 @@ python src/main.py
 
 ## 📞 Liên hệ
 
-**Team Lead**: Hoàng Hữu Diện  
+**Team Lead**: Hoàng Hữu Điền
 **MSSV**: 172100041
 
 ---
