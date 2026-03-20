@@ -1,0 +1,5 @@
+# Core dependencies
+# Thêm dependencies vào đây sau
+# Ví dụ:
+# Flask==2.3.0
+# SQLAlchemy==2.0.0
