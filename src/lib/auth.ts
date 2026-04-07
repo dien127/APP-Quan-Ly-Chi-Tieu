@@ -5,8 +5,14 @@ import { z } from 'zod';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 
+if (!process.env.AUTH_SECRET && process.env.NODE_ENV === 'production') {
+  process.env.AUTH_SECRET = 'baicuoiki-secret-key-fallback-32-chars-long';
+}
+
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
+  secret: process.env.AUTH_SECRET || 'baicuoiki-super-secret-key-for-v5-32-chars',
+  trustHost: true,
   providers: [
     Credentials({
       async authorize(credentials) {

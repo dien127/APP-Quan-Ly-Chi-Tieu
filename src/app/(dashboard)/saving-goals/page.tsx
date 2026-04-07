@@ -32,13 +32,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
+
 import { toast } from "sonner";
 import { 
   createSavingGoal, 
@@ -69,15 +63,15 @@ import {
 type SavingGoal = {
   id: string;
   name: string;
-  targetAmount: number | { toString(): string }; // Prisma Decimal
-  currentAmount: number | { toString(): string };
+  targetAmount: number;
+  currentAmount: number;
   deadlineDate: Date;
 };
 
 type Wallet = {
   id: string;
   name: string;
-  balance: number | { toString(): string };
+  balance: number;
 };
 
 export default function SavingGoalsPage() {
@@ -106,7 +100,13 @@ export default function SavingGoalsPage() {
         getSavingGoals(),
         getFormOptions()
       ]);
-      setGoals(goalsData as SavingGoal[]);
+      // Serialize Decimal → number để tránh lỗi
+      const serializedGoals = goalsData.map((g) => ({
+        ...g,
+        targetAmount: Number(g.targetAmount),
+        currentAmount: Number(g.currentAmount),
+      }));
+      setGoals(serializedGoals);
       setWallets(options.wallets as Wallet[]);
     } finally {
       setIsLoading(false);
@@ -377,18 +377,18 @@ export default function SavingGoalsPage() {
                         <div className="grid gap-4 py-4">
                           <div className="grid gap-2">
                             <Label>Chọn ví nguồn</Label>
-                            <Select value={selectedWalletId} onValueChange={(val) => setSelectedWalletId(val || "")}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Chọn ví..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {wallets.map(w => (
-                                  <SelectItem key={w.id} value={w.id}>
-                                    {w.name} ({formatCurrency(Number(w.balance))})
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
+                            <select
+                              value={selectedWalletId}
+                              onChange={(e) => setSelectedWalletId(e.target.value)}
+                              className="flex h-9 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                            >
+                              <option value="">-- Chọn ví --</option>
+                              {wallets.map(w => (
+                                <option key={w.id} value={w.id}>
+                                  {w.name} ({formatCurrency(w.balance)})
+                                </option>
+                              ))}
+                            </select>
                           </div>
                           <div className="grid gap-2">
                             <Label>Số tiền nạp (VND)</Label>

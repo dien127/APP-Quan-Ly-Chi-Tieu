@@ -1,0 +1,23 @@
+﻿
+> temp-app@0.1.0 start
+> next start
+
+â–² Next.js 16.2.2
+- Local:         http://localhost:3000
+- Network:       http://169.254.80.110:3000
+âœ“ Ready in 193ms
+node.exe : â  Warning: Next.js inferred your workspace root, but it may not be correct.
+At line:1 char:1
++ & "D:\node/node.exe" "D:\node/node_modules/npm/bin/npm-cli.js" run st ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (â  Warning: Ne...not be correct.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ We detected multiple lockfiles and selected the directory of C:\Users\Administrator\package-lock.json as the root 
+directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the 
+lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Administrator\.gemini\antigravity\scratch\APP-Quan-Ly-Chi-Tieu\package-lock.json
+

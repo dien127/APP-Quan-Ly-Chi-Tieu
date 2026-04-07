@@ -174,7 +174,7 @@ export async function getTransactions(params: {
     ];
   }
 
-  const [transactions, total] = await Promise.all([
+  const [rawTransactions, total] = await Promise.all([
     prisma.transaction.findMany({
       where,
       skip,
@@ -189,6 +189,14 @@ export async function getTransactions(params: {
     prisma.transaction.count({ where }),
   ]);
 
+  // Serialize Decimal → number để tránh lỗi khi truyền sang Client Components
+  const transactions = rawTransactions.map((t) => ({
+    ...t,
+    amount: Number(t.amount),
+    wallet: t.wallet ? { ...t.wallet, balance: Number(t.wallet.balance) } : t.wallet,
+    toWallet: t.toWallet ? { ...t.toWallet, balance: Number(t.toWallet.balance) } : t.toWallet,
+  }));
+
   return {
     transactions,
     total,
@@ -200,10 +208,13 @@ export async function getFormOptions() {
   const session = await auth();
   if (!session?.user?.id) return { wallets: [], categories: [] };
 
-  const [wallets, categories] = await Promise.all([
+  const [rawWallets, categories] = await Promise.all([
     prisma.wallet.findMany({ where: { userId: session.user.id } }),
     prisma.category.findMany({ where: { userId: session.user.id, isDeleted: false } })
   ]);
+
+  // Serialize Decimal → number để tránh lỗi khi truyền sang Client Components
+  const wallets = rawWallets.map((w) => ({ ...w, balance: Number(w.balance) }));
 
   return { wallets, categories };
 }
