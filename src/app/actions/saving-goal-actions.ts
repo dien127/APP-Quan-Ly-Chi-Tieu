@@ -145,8 +145,15 @@ export async function getSavingGoals() {
   if (!session?.user?.id) return [];
   const userId = session.user.id;
 
-  return prisma.savingGoal.findMany({
+  const goals = await prisma.savingGoal.findMany({
     where: { userId },
     orderBy: { createdAt: "desc" },
   });
+
+  // Serialize Decimal → number để tránh lỗi khi truyền sang Client Components
+  return goals.map((g) => ({
+    ...g,
+    targetAmount: Number(g.targetAmount),
+    currentAmount: Number(g.currentAmount),
+  }));
 }

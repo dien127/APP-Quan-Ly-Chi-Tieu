@@ -16,10 +16,14 @@ import { PaginationNav } from "@/components/pagination-nav";
 import { formatCurrency, formatCurrencyCompact } from "@/lib/utils";
 import type { Transaction, Wallet, Category } from "@prisma/client";
 
+// Wallet với balance đã được serialize sang number
+type SerializedWallet = Omit<Wallet, "balance"> & { balance: number };
+
 // Type chính xác từ Prisma (thay vì any)
-type TransactionWithRelations = Transaction & {
-  wallet: Wallet;
-  toWallet: Wallet | null;
+type TransactionWithRelations = Omit<Transaction, "amount"> & {
+  amount: number;
+  wallet: SerializedWallet;
+  toWallet: SerializedWallet | null;
   category: Category | null;
 };
 

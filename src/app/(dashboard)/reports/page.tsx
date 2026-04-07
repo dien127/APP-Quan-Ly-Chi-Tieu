@@ -22,13 +22,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { exportTransactionsToExcel, getCashFlowTrend } from "@/app/actions/report-actions";
 import { TrendsChart } from "@/components/dashboard/trends-chart";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
 
 export default function ReportsPage() {
   const [trendData, setTrendData] = useState<{ label: string; income: number; expense: number }[]>([]);
@@ -110,17 +103,15 @@ export default function ReportsPage() {
           <CardContent className="space-y-6">
              <div className="space-y-2">
                <label className="text-xs font-semibold uppercase text-muted-foreground">Thời gian</label>
-               <Select defaultValue="6m">
-                 <SelectTrigger>
-                   <SelectValue placeholder="Chọn khoảng thời gian" />
-                 </SelectTrigger>
-                 <SelectContent>
-                   <SelectItem value="1m">Tháng này</SelectItem>
-                   <SelectItem value="3m">3 tháng qua</SelectItem>
-                   <SelectItem value="6m">6 tháng qua</SelectItem>
-                   <SelectItem value="1y">1 năm qua</SelectItem>
-                 </SelectContent>
-               </Select>
+               <select
+                 defaultValue="6m"
+                 className="flex h-9 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+               >
+                 <option value="1m">Tháng này</option>
+                 <option value="3m">3 tháng qua</option>
+                 <option value="6m">6 tháng qua</option>
+                 <option value="1y">1 năm qua</option>
+               </select>
              </div>
              <div className="space-y-2">
                <label className="text-xs font-semibold uppercase text-muted-foreground">Trạng thái</label>
