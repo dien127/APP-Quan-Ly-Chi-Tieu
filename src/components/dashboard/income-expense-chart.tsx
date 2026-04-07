@@ -1,0 +1,81 @@
+"use client";
+
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer 
+} from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface IncomeVsExpenseChartProps {
+  data: {
+    date: string;
+    income: number;
+    expense: number;
+  }[];
+}
+
+export function IncomeVsExpenseChart({ data }: IncomeVsExpenseChartProps) {
+  const formatCurrency = (val: number) => {
+    return new Intl.NumberFormat("vi-VN").format(val);
+  };
+
+  return (
+    <Card className="flex flex-col h-full border-none shadow-none">
+      <CardHeader className="pb-0">
+        <CardTitle className="text-sm font-medium">So sánh Thu nhập & Chi tiêu (30 ngày)</CardTitle>
+      </CardHeader>
+      <CardContent className="flex-1 pb-4 min-h-[350px] pt-4">
+        {data.length === 0 ? (
+          <div className="flex items-center justify-center h-full text-muted-foreground text-xs italic">
+            Chưa có biểu đồ
+          </div>
+        ) : (
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />
+              <XAxis 
+                dataKey="date" 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{ fontSize: 10 }}
+                minTickGap={20}
+              />
+              <YAxis 
+                axisLine={false} 
+                tickLine={false} 
+                tickFormatter={(val) => `${val/1000}k`}
+                tick={{ fontSize: 10 }}
+              />
+              <Tooltip 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                formatter={(value: any) => [formatCurrency(Number(value)) + " ₫", ""]}
+                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              />
+              <Legend verticalAlign="top" align="right" height={36} iconType="circle" />
+              <Bar 
+                dataKey="income" 
+                name="Thu nhập" 
+                fill="#10b981" 
+                radius={[4, 4, 0, 0]} 
+                barSize={12}
+              />
+              <Bar 
+                dataKey="expense" 
+                name="Chi tiêu" 
+                fill="#ef4444" 
+                radius={[4, 4, 0, 0]} 
+                barSize={12}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
