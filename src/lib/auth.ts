@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET || 'baicuoiki-super-secret-key-for-v5-32-chars',
   trustHost: true,
   providers: [
     Credentials({
