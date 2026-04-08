@@ -1,7 +1,4 @@
-import NextAuth from 'next-auth';
-import { authConfig } from '@/lib/auth.config';
-
-const { auth } = NextAuth(authConfig);
+import { auth } from "@/lib/auth";
 
 export default auth;
 
@@ -12,9 +9,9 @@ export const config = {
    * - /_next/static (static files)
    * - /_next/image (image optimization)
    * - /favicon.ico, /manifest.json, /icons/* (public assets)
-   * - files có extension (.png, .svg, .jpg...)
+   * - files có extension (.png, .svg, .jpg, .jpeg, .gif, .webp, .css, .js)
    */
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon\\.ico|manifest\\.json|icons|.*\\.(?:png|svg|jpg|jpeg|gif|webp)$).*)',
+    "/((?!api|_next/static|_next/image|favicon\\.ico|manifest\\.json|icons|.*\\.(?:png|svg|jpg|jpeg|gif|webp|css|js)$).*)",
   ],
 };
