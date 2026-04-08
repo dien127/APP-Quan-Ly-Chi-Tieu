@@ -9,6 +9,7 @@ export function Sidebar() {
   const menuItems = [
     { name: "Tổng quan", href: "/" },
     { name: "Sổ giao dịch", href: "/transactions" },
+    { name: "Giao dịch định kỳ", href: "/recurring-transactions" },
     { name: "Ngân sách", href: "/budgets" },
     { name: "Ví của tôi", href: "/wallets" },
     { name: "Danh mục", href: "/categories" },
