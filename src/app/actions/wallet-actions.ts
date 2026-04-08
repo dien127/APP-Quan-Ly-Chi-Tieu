@@ -83,10 +83,15 @@ export async function getWallets() {
     if (!session?.user?.id) throw new Error("Unauthorized");
     const userId = session.user.id;
 
-    const wallets = await prisma.wallet.findMany({
+    const rawWallets = await prisma.wallet.findMany({
       where: { userId },
       orderBy: { name: "asc" },
     });
+
+    const wallets = rawWallets.map(w => ({
+      ...w,
+      balance: Number(w.balance)
+    }));
 
     return { success: true, wallets };
   } catch (error) {
