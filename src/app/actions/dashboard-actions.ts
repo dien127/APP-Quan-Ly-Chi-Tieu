@@ -41,6 +41,7 @@ export async function getDashboardStats() {
 
     // 2. Dữ liệu Bar/Line Chart: Thu nhập vs Chi tiêu theo ngày (Tối ưu SQL - Mục 4.1)
     // Dùng đúng mapping @@map từ schema.prisma
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dailyStatsRaw = await prisma.$queryRaw<any[]>`
       SELECT 
         TO_CHAR(date, 'DD/MM') as date_label,
