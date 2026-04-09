@@ -148,7 +148,7 @@ export async function getRecurringTransactions() {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
   
-  return prisma.recurringTransaction.findMany({
+  const transactions = await prisma.recurringTransaction.findMany({
     where: { userId: session.user.id },
     orderBy: { createdAt: "desc" },
     include: {
@@ -157,6 +157,35 @@ export async function getRecurringTransactions() {
       category: true,
     },
   });
+
+  // Convert Decimal to number for Client Component serialization
+  return transactions.map(tx => ({
+    id: tx.id,
+    userId: tx.userId,
+    walletId: tx.walletId,
+    toWalletId: tx.toWalletId,
+    categoryId: tx.categoryId,
+    amount: (tx.amount as any).toNumber(),
+    type: tx.type,
+    note: tx.note,
+    interval: tx.interval,
+    status: tx.status,
+    startDate: tx.startDate,
+    endDate: tx.endDate,
+    nextProcessingDate: tx.nextProcessingDate,
+    lastProcessedDate: tx.lastProcessedDate,
+    createdAt: tx.createdAt,
+    updatedAt: tx.updatedAt,
+    wallet: tx.wallet ? {
+      ...tx.wallet,
+      balance: (tx.wallet.balance as any).toNumber()
+    } : null,
+    toWallet: tx.toWallet ? {
+      ...tx.toWallet,
+      balance: (tx.toWallet.balance as any).toNumber()
+    } : null,
+    category: tx.category,
+  }));
 }
 
 interface CronResult {

@@ -36,17 +36,22 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
     const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
     const result: ScannedData = {};
 
-    // 1. Trích xuất tên cửa hàng (Thường là dòng đầu tiên)
-    if (lines.length > 0) {
-      result.note = lines[0].substring(0, 50);
+    // 1. Trích xuất tên cửa hàng (Thường là dòng đầu tiên, bỏ qua từ khóa vô ích)
+    const genericKeywords = /hóa đơn|phiếu|thanh toán|bán lẻ|biên lai|receipt|bill|invoice|welcome/i;
+    for (let i = 0; i < Math.min(lines.length, 3); i++) {
+      if (!genericKeywords.test(lines[i]) && lines[i].length > 3) {
+        result.note = lines[i].substring(0, 50);
+        break;
+      }
     }
+    if (!result.note && lines.length > 0) result.note = lines[0].substring(0, 50);
 
     // 2. Logic trích xuất số tiền cải tiến
     const extractAmount = (line: string): number | null => {
-      // Tìm số có phân cách hàng nghìn (.,) hoặc số liền mạch 4-12 chữ số
-      const matches = line.match(/(\d{1,3}([\.,]\d{3})+)|(\d{4,12})/);
+      // Tìm số có phân cách hàng nghìn (., hoặc khoảng trắng) hoặc số liền mạch 4-12 chữ số
+      const matches = line.match(/(\d{1,3}([\.,\s]\d{3})+)|(\d{4,12})/);
       if (matches) {
-        const raw = matches[0].replace(/[\.,]/g, "");
+        const raw = matches[0].replace(/[\.,\s]/g, "");
         const val = parseInt(raw);
         return isNaN(val) ? null : val;
       }
@@ -144,13 +149,12 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
       await worker.terminate();
 
       const data = parseReceiptText(text);
-      
       if (data.amount || data.note || data.date) {
+        toast.success("Đã phân tích xong hóa đơn!");
         onScanComplete(data);
-        toast.success("Đã trích xuất thông tin hóa đơn!");
         handleClose();
       } else {
-        toast.error("Không tìm thấy thông tin trên hóa đơn. Vui lòng chụp rõ hơn.");
+        toast.error("Không tìm thấy thông tin hợp lệ trên hóa đơn. Hãy thử chụp góc khác hoặc đủ sáng hơn.");
       }
     } catch (error) {
       console.error("OCR Error:", error);
@@ -180,10 +184,11 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Quét hóa đơn thông minh</DialogTitle>
-          </DialogHeader>
+        <DialogContent className="sm:max-w-md p-0 overflow-hidden flex flex-col max-h-[90vh]">
+          <div className="p-6 overflow-y-auto flex-1 no-scrollbar">
+            <DialogHeader className="mb-4">
+              <DialogTitle>Quét hóa đơn thông minh</DialogTitle>
+            </DialogHeader>
           
           <div className="flex flex-col items-center justify-center gap-6 py-8">
             {!previewUrl ? (
@@ -237,11 +242,12 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
             />
           </div>
 
-          <DialogFooter className="sm:justify-start">
-            <Button type="button" variant="ghost" onClick={handleClose} disabled={isProcessing}>
-              Hủy bỏ
-            </Button>
-          </DialogFooter>
+            <DialogFooter className="sm:justify-start mt-4">
+              <Button type="button" variant="ghost" onClick={handleClose} disabled={isProcessing}>
+                Hủy bỏ
+              </Button>
+            </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </>

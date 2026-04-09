@@ -4,8 +4,7 @@ import { useState } from "react";
 import { 
   deleteRecurringTransaction, 
   pauseRecurringTransaction, 
-  resumeRecurringTransaction,
-  triggerCronManually
+  resumeRecurringTransaction
 } from "@/app/actions/recurring-actions";
 import { RecurringTransaction, Wallet, Category } from "@prisma/client";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,7 +23,6 @@ type RecurringWithRelations = RecurringTransaction & {
 
 export function RecurringList({ data }: { data: RecurringWithRelations[] }) {
   const [loading, setLoading] = useState<string | null>(null);
-  const [cronLoading, setCronLoading] = useState(false);
 
   const handleAction = async (id: string, action: 'PAUSE' | 'RESUME' | 'DELETE') => {
     setLoading(id);
@@ -46,43 +44,20 @@ export function RecurringList({ data }: { data: RecurringWithRelations[] }) {
     }
   };
 
-  const handleTestCron = async () => {
-    setCronLoading(true);
-    try {
-        const res = await triggerCronManually();
-        if(res.success) {
-            toast.success(`Chạy Cron xong! Xử lý: ${res.data?.processedCount}, Lỗi: ${res.data?.errorsCount}`);
-        } else {
-            toast.error(res.error || "Có lỗi khi chạy cron");
-        }
-    } catch {
-        toast.error("Lỗi 500 khi gọi cron");
-    } finally {
-        setCronLoading(false);
-    }
-  }
+
 
   if (data.length === 0) {
     return (
       <div className="text-center py-10 bg-card rounded-lg border border-dashed">
         <Repeat className="mx-auto h-12 w-12 text-muted-foreground opacity-50 mb-4" />
         <p className="text-muted-foreground">Chưa có giao dịch định kỳ nào.</p>
-        <Button onClick={handleTestCron} variant="outline" className="mt-4" disabled={cronLoading}>
-           {cronLoading ? <Loader2 className="animate-spin h-4 w-4 mr-2" /> : null}
-           Chạy Cron Test Ngầm
-        </Button>
+
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button onClick={handleTestCron} variant="secondary" size="sm" disabled={cronLoading}>
-           {cronLoading ? <Loader2 className="animate-spin h-4 w-4 mr-2" /> : null}
-           Chạy Cron Test (Dev Only)
-        </Button>
-      </div>
 
       {data.map((item) => (
         <Card key={item.id} className={item.status === 'PAUSED' ? 'opacity-60' : ''}>

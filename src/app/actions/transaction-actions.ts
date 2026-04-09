@@ -312,8 +312,10 @@ export async function getFormOptions() {
   ]);
 
   // Serialize Decimal → number để tránh lỗi khi truyền sang Client Components
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const wallets = (rawWallets as any).map((w: any) => ({ ...w, balance: Number(w.balance) }));
+const wallets = (rawWallets as any).map((w: any) => ({
+  ...w,
+  balance: Number(w.balance),
+}));
 
   return { wallets, categories, tags };
 }

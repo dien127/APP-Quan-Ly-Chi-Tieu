@@ -59,7 +59,7 @@ export default async function TransactionsPage(props: {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-10">
-      <FadeIn delay={0.1}>
+      <FadeIn delay={0.05}>
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-gradient">Quản lý giao dịch</h1>
@@ -69,7 +69,7 @@ export default async function TransactionsPage(props: {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.2} direction="up">
+      <FadeIn delay={0.1} direction="up">
         <div className="glass-card rounded-2xl border p-4">
           <div className="mb-4 flex items-center gap-2 font-semibold text-primary">
             <Filter className="h-4 w-4" />
@@ -79,7 +79,7 @@ export default async function TransactionsPage(props: {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.3} direction="up">
+      <FadeIn delay={0.15} direction="up">
         <div className="glass-card rounded-2xl border overflow-hidden">
           <Table>
             <TableHeader className="bg-muted/30">
@@ -178,7 +178,7 @@ export default async function TransactionsPage(props: {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.4}>
+      <FadeIn delay={0.2}>
         {totalPages > 1 && (
           <PaginationNav currentPage={page} totalPages={totalPages} />
         )}
