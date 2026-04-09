@@ -306,7 +306,15 @@ export async function getFormOptions() {
   ]);
 
   // Serialize Decimal → number để tránh lỗi khi truyền sang Client Components
-  const wallets = (rawWallets as any).map((w: any) => ({ ...w, balance: Number(w.balance) }));
+  const wallets = (rawWallets as any).map((w: any) => ({
+    id: w.id,
+    userId: w.userId,
+    name: w.name,
+    balance: Number(w.balance),
+    icon: w.icon,
+    createdAt: w.createdAt,
+    updatedAt: w.updatedAt,
+  }));
 
   return { wallets, categories, tags };
 }

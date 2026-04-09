@@ -17,7 +17,8 @@ const withPWA = require("next-pwa")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  devIndicators: false,
   turbopack: {},
   allowedDevOrigins: [
     '192.168.100.179', 

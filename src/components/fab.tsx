@@ -206,13 +206,14 @@ export function FloatingActionButton() {
       <DialogTrigger render={<Button className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg" size="icon" />}>
         <Plus className="h-6 w-6" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Thêm giao dịch mới</DialogTitle>
-          <DialogDescription>
-            Ghi chép một khoản thu, chi hoặc chuyển khoản.
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden flex flex-col max-h-[90vh]">
+        <div className="p-6 overflow-y-auto flex-1 no-scrollbar">
+          <DialogHeader className="mb-4">
+            <DialogTitle>Thêm giao dịch mới</DialogTitle>
+            <DialogDescription>
+              Ghi chép một khoản thu, chi hoặc chuyển khoản.
+            </DialogDescription>
+          </DialogHeader>
 
         {isLoading ? (
           <div className="py-8 text-center text-sm text-muted-foreground">Đang tải dữ liệu...</div>
@@ -220,9 +221,25 @@ export function FloatingActionButton() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <ReceiptScanner onScanComplete={(data) => {
-                if (data.amount) form.setValue("amount", data.amount);
-                if (data.date) form.setValue("date", data.date);
-                if (data.note) form.setValue("note", data.note);
+                const currentValues = form.getValues();
+                form.reset({
+                  ...currentValues,
+                  amount: data.amount || currentValues.amount,
+                  date: data.date || currentValues.date,
+                  note: data.note || currentValues.note,
+                });
+                
+                const foundFields = [];
+                if (data.amount) foundFields.push(`Số tiền: ${data.amount.toLocaleString()}đ`);
+                if (data.note) foundFields.push(`Ghi chú: ${data.note}`);
+                
+                if (foundFields.length > 0) {
+                  toast.success("Đã tìm thấy thông tin!", {
+                    description: foundFields.join("\n"),
+                  });
+                } else {
+                  toast.info("Xử lý xong nhưng không tìm thấy thông tin cụ thể.");
+                }
               }} />
               
               <FormField
@@ -385,6 +402,7 @@ export function FloatingActionButton() {
             </form>
           </Form>
         )}
+        </div>
       </DialogContent>
     </Dialog>
   );

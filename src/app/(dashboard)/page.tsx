@@ -66,7 +66,7 @@ export default async function DashboardPage() {
       <BudgetAlerts />
       
       {/* Header Chào mừng / Welcome Section */}
-      <FadeIn delay={0.1}>
+      <FadeIn delay={0.05}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-1">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">{currentDate}</p>
@@ -85,7 +85,7 @@ export default async function DashboardPage() {
       </FadeIn>
 
       {!hasData ? (
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.1}>
           <Card className="glass-card flex flex-col items-center justify-center p-16 text-center border-dashed">
             <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl bg-primary/10 shadow-inner">
               <Wallet className="h-12 w-12 text-primary animate-pulse" />
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
         <>
           {/* Dashboard Stats Grid */}
           <div className="grid gap-6 md:grid-cols-3">
-            <FadeIn delay={0.15} direction="up">
+            <FadeIn delay={0.1} direction="up">
               <div className="premium-card relative group rounded-3xl p-6 bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-xl shadow-emerald-500/20 overflow-hidden h-full">
                 <div className="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
                   <Wallet size={120} />
@@ -119,7 +119,7 @@ export default async function DashboardPage() {
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.25} direction="up">
+            <FadeIn delay={0.12} direction="up">
               <div className="glass-card premium-card rounded-3xl p-6 h-full">
                  <div className="flex justify-between items-start mb-4">
                     <div className="p-3 bg-primary/10 rounded-2xl text-primary">
@@ -132,7 +132,7 @@ export default async function DashboardPage() {
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.35} direction="up">
+            <FadeIn delay={0.14} direction="up">
               <div className="glass-card premium-card rounded-3xl p-6 h-full border-rose-500/10">
                  <div className="flex justify-between items-start mb-4">
                     <div className="p-3 bg-rose-500/10 rounded-2xl text-rose-500">
@@ -152,7 +152,7 @@ export default async function DashboardPage() {
 
           <div className="grid gap-6 grid-cols-1 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <FadeIn delay={0.45} direction="left">
+              <FadeIn delay={0.16} direction="left">
                 <Card className="glass-card premium-card rounded-3xl overflow-hidden h-full border-none shadow-lg">
                   <CardHeader className="pb-0">
                     <CardTitle className="text-lg font-bold">Phân bổ Chi tiêu</CardTitle>
@@ -164,7 +164,7 @@ export default async function DashboardPage() {
             </div>
 
             <div className="lg:col-span-8">
-              <FadeIn delay={0.55} direction="right">
+              <FadeIn delay={0.18} direction="right">
                 <Card className="glass-card premium-card rounded-3xl overflow-hidden h-full border-none shadow-lg">
                   <CardHeader className="pb-0">
                     <CardTitle className="text-lg font-bold">Xu hướng Tài chính</CardTitle>
@@ -177,14 +177,14 @@ export default async function DashboardPage() {
           </div>
 
           <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-            <FadeIn delay={0.65} direction="up">
+            <FadeIn delay={0.2} direction="up">
               <div className="h-full space-y-6">
                 <AIAdvisor />
                 <TransactionMap transactions={locationRes.success ? (locationRes.data as unknown as MapTransaction[]) : []} />
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.7} direction="up">
+            <FadeIn delay={0.22} direction="up">
               <Card className="glass-card premium-card rounded-3xl h-full border-none shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-lg font-bold">Mục tiêu Tiết kiệm</CardTitle>
@@ -239,7 +239,7 @@ export default async function DashboardPage() {
 
           <div className="grid gap-6 md:grid-cols-2">
             {/* Wallet List Card */}
-            <FadeIn delay={0.75} direction="up">
+            <FadeIn delay={0.24} direction="up">
               <Card className="glass-card premium-card rounded-3xl border-none shadow-lg">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
@@ -277,7 +277,7 @@ export default async function DashboardPage() {
             </FadeIn>
 
             {/* Recent Categories/Activity */}
-            <FadeIn delay={0.8} direction="up">
+            <FadeIn delay={0.26} direction="up">
               <Card className="glass-card premium-card rounded-3xl border-none shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-lg font-bold">Phân loại Dòng tiền</CardTitle>
