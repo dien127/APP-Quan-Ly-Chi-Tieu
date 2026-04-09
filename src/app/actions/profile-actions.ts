@@ -38,3 +38,9 @@ export async function updateProfile(data: z.infer<typeof profileSchema>): Promis
     return actionError(error);
   }
 }
+
+export async function updatePassword(data: Record<string, string>): Promise<ActionResult> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _d = data;
+  return { success: false, error: "Chức năng đổi mật khẩu chưa được hỗ trợ." };
+}

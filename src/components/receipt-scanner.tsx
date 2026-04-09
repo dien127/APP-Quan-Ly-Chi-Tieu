@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
+// @ts-expect-error - tesseract.js types not available
 import { createWorker } from "tesseract.js";
-import { Camera, Upload, Loader2, Check, X, SmartphoneIcon } from "lucide-react";
+import { Camera, Upload, Loader2, SmartphoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -132,7 +133,7 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
 
     try {
       const worker = await createWorker("vie", 1, {
-        logger: m => {
+        logger: (m: { status: string; progress: number }) => {
           if (m.status === "recognizing text") {
             setProgress(Math.round(m.progress * 100));
           }
@@ -142,7 +143,6 @@ export function ReceiptScanner({ onScanComplete }: ReceiptScannerProps) {
       const { data: { text } } = await worker.recognize(file);
       await worker.terminate();
 
-      console.log("OCR Result:", text);
       const data = parseReceiptText(text);
       
       if (data.amount || data.note || data.date) {
