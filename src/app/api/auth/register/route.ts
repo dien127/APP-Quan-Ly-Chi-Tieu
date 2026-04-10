@@ -49,6 +49,12 @@ export async function POST(req: Request) {
         },
       });
 
+      await tx.notificationPreference.create({
+        data: {
+          userId: user.id,
+        },
+      });
+
       // 3. Tạo 5 Category mặc định (1 INCOME, 4 EXPENSE)
       const categories = [
         { name: "Lương", type: "INCOME" as const },

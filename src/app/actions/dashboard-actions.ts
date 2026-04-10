@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { startOfDay, subDays, format } from "date-fns";
+import { startOfDay, subDays } from "date-fns";
 
 export async function getDashboardMoMStats() {
   try {
@@ -59,7 +59,8 @@ export async function getDashboardChartData() {
         where: { userId, type: 'EXPENSE', date: { gte: thirtyDaysAgo } },
         _sum: { amount: true },
       }),
-      prisma.$queryRaw<any[]>`
+      // 2. Dữ liệu Bar Chart
+      prisma.$queryRaw<{ date_label: string; income: number; expense: number }[]>`
         SELECT 
           TO_CHAR(date, 'DD/MM') as date_label,
           SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income,
@@ -83,6 +84,7 @@ export async function getDashboardChartData() {
         color: category?.color || "#94a3b8",
       };
     }).filter(item => item.value > 0);
+
 
     const barChartData = dailyStatsRaw.map(item => ({
       date: item.date_label,

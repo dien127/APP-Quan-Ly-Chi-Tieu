@@ -2,7 +2,7 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency, formatCurrencyCompact } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 interface SpendingPieChartProps {
   data: {
@@ -47,7 +47,7 @@ export function SpendingPieChart({ data }: SpendingPieChartProps) {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(value: any) => [formatCurrency(Number(value || 0)), "Chi tiêu"]}
+                  formatter={(value: string | number | undefined | readonly (string | number)[]) => [formatCurrency(Number(value || 0)), "Chi tiêu"]}
                   contentStyle={{ 
                     borderRadius: '16px', 
                     border: 'none', 

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,7 +33,7 @@ export function DeleteBudgetButton({ budgetId }: { budgetId: string }) {
       } else {
         toast.error(res.error || "Không thể xóa ngân sách");
       }
-    } catch (error) {
+    } catch {
       toast.error("Lỗi khi xóa ngân sách");
     } finally {
       setLoading(false);
@@ -43,7 +42,7 @@ export function DeleteBudgetButton({ budgetId }: { budgetId: string }) {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger nativeButton={false}>
+      <AlertDialogTrigger nativeButton={true}>
         <div className="h-8 w-8 inline-flex items-center justify-center text-muted-foreground hover:text-rose-600 hover:bg-rose-100/50 rounded-full transition-colors cursor-pointer">
           <Trash2 className="h-4 w-4" />
         </div>
