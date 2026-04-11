@@ -44,3 +44,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# diagnostic and temporary files
+*.txt
+*.log
+diff.txt
+filenames.txt
+files.txt
+list.txt
+log.txt
+check.txt
+final_main_check.txt
+latest_files.txt
+main_files.txt
+show_stat.txt

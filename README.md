@@ -1,117 +1,127 @@
-# 💰 APP Quản lý Chi tiêu - Financial Management Solution (MVP)
+# SpendWise - Ứng dụng Quản lý Tài chính Thông minh 🚀
 
-![Next.js](https://img.shields.io/badge/Next.js-15%2B-black?style=for-the-badge&logo=next.js)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Prisma](https://img.shields.io/badge/Prisma-6.0-2D3748?style=for-the-badge&logo=prisma)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql)
-![Google Gemini](https://img.shields.io/badge/Google_Gemini-AI-orange?style=for-the-badge&logo=google-gemini)
+![SpendWise Banner](./public/assets/images/banner.png)
 
-Chào mừng bạn đến với dự án **Quản lý Chi tiêu Cá nhân**. Đây là nền tảng quản lý tài chính hiện đại được xây dựng nhằm giúp người dùng tối ưu hóa dòng tiền, lập kế hoạch tiết kiệm và nhận lời khuyên thông minh từ trí tuệ nhân tạo (AI).
+SpendWise là một ứng dụng web hiện đại, được thiết kế để giúp cá nhân quản lý tài chính một cách khoa học, hiệu quả và tự động. Ứng dụng tích hợp các công nghệ tiên tiến nhất như Next.js 15, Prisma, OCR (Nhận diện ký tự quang học) và Trí tuệ nhân tạo (Gemini AI).
 
 ---
 
-## 🏗️ Kiến trúc & Công nghệ (Tech Stack)
+## ✨ Tính năng nổi bật
 
-Dự án được xây dựng trên nền tảng Fullstack hiện đại, ưu tiên tính linh hoạt và khả năng mở rộng cho nhóm phát triển 5 người.
+### 🏦 Quản lý Tài sản Đa năng
+- Quản lý đồng thời nhiều ví và tài khoản ngân hàng.
+- Theo dõi số dư thực tế theo thời gian thực.
+- Chuyển khoản nội bộ giữa các ví linh hoạt.
 
-*   **Core**: [Next.js 16/15 (App Router)](https://nextjs.org/) với Turbopack (Dev server siêu tốc).
-*   **Ngôn ngữ**: [TypeScript](https://www.typescriptlang.org/) (Type-safe 100%).
-*   **Cơ sở dữ liệu**: [PostgreSQL](https://www.postgresql.org/) (Quản lý dữ liệu quan hệ).
-*   **ORM**: [Prisma](https://www.prisma.io/) (Xử lý truy vấn dữ liệu mạnh mẽ).
-*   **Xác thực (Auth)**: [NextAuth.js v5 (Beta 30)](https://authjs.dev/) - Credentials Provider.
-*   **UI/UX**: [Base UI](https://base-ui.com/), [Shadcn UI](https://ui.shadcn.com/), [Framer Motion](https://www.framer.com/motion/) (Animation).
-*   **Biểu đồ**: [Recharts](https://recharts.org/) (Trực quan hóa dữ liệu).
-*   **AI**: [Google Gemini 1.5 Flash](https://aistudio.google.com/) (Phân tích tài chính thông minh).
-*   **PWA**: [next-pwa](https://github.com/shadowwalker/next-pwa) (Hỗ trợ cài đặt như ứng dụng Mobile).
+### 📸 Quét Hóa đơn Thông minh (OCR)
+- Tích hợp công nghệ **Tesseract.js**.
+- Tự động bóc tách số tiền, ngày tháng và tên cửa hàng từ ảnh chụp hóa đơn.
+- Giảm thiểu 90% thời gian nhập liệu thủ công.
+
+### 🤖 Cố vấn Tài chính AI (Gemini AI)
+- Sử dụng **Google Gemini AI** để phân tích thói quen chi tiêu.
+- Đưa ra lời khuyên tài chính cá nhân hóa dựa trên dữ liệu thực tế.
+- Cảnh báo các rủi ro vung tay quá trán.
+
+### 📊 Báo cáo & Phân tích chuyên sâu
+- Biểu đồ Dashboard trực quan (Pie Chart, Bar Chart).
+- Phân tích xu hướng thu chi hàng tháng (MoM - Month over Month).
+- Bản đồ giao dịch (Transaction Map) dựa trên vị trí địa lý.
+
+### 🎯 Ngân sách & Mục tiêu
+- Thiết lập hạn mức chi tiêu cho từng danh mục (Ăn uống, Mua sắm...).
+- Theo dõi mục tiêu tiết kiệm với thanh tiến độ trực quan.
 
 ---
 
-## ✨ Tính năng chính (Feature Modules)
+## 🛠 Công nghệ sử dụng
 
-1.  **📊 Dashboard Tổng quan**: Trực quan hóa tài sản thực tế, thu nhập, chi tiêu và dòng tiền 30 ngày.
-2.  **🤖 Cố vấn AI**: Phân tích thói quen chi tiêu và đưa ra 3 lời khuyên tài chính cá nhân hóa từ Gemini AI.
-3.  **💳 Quản lý Ví (Wallets)**: Theo dõi số dư đa ví, chuyển khoản linh hoạt giữa các ví.
-4.  **📝 Giao dịch (Transactions)**: Ghi chép chi tiêu/thu nhập chi tiết, phân loại theo danh mục (Icons/Colors).
-5.  **📅 Ngân sách (Budgets)**: Thiết lập hạn mức chi tiêu hàng tháng cho từng danh mục với cảnh báo tiến độ (Xanh/Vàng/Đỏ).
-6.  **🎯 Mục tiêu Tiết kiệm (Saving Goals)**: Lập kế hoạch tiết kiệm dài hạn, tự động trừ tiền từ ví và theo dõi tiến độ hoàn thành.
-7.  **📈 Báo cáo (Reports)**: Biểu đồ xu hướng tài chính chuyên sâu và tính năng **Xuất báo cáo Excel (.xlsx)**.
-8.  **⚙️ Cài đặt (Profile)**: Cập nhật thông tin cá nhân, Avatar và cấu hình tiền tệ mặc định (VND, USD, EUR...).
+| Công nghệ | Vai trò |
+|-----------|---------|
+| **Next.js 15** | Framework chính (App Router & Server Actions) |
+| **Prisma** | ORM cho PostgreSQL |
+| **Tailwind CSS** | Giao diện Responsive & Modern |
+| **Shadcn UI** | Bộ Component chuẩn Premium |
+| **NextAuth.js** | Xác thực người dùng bảo mật |
+| **Tesseract.js** | Xử lý OCR phía Client |
+| **Gemini AI** | Phân tích và tư vấn tài chính |
+| **Recharts** | Hiển thị biểu đồ thống kê |
 
 ---
 
-## 🛠️ Hướng dẫn cài đặt & Chạy dự án (Getting Started)
+## 🚀 Hướng dẫn cài đặt & Chạy dự án
 
-Dành cho các thành viên mới pull code về máy:
+### 1. Chuẩn bị môi trường
+- Node.js 18.x trở lên
+- PostgreSQL Database (Neon DB hoặc Local)
 
-### 1. Yêu cầu hệ thống
-*   Node.js 20+
-*   PostgreSQL (Local hoặc Remote như Neon/Supabase)
-
-### 2. Cài đặt Dependencies
+### 2. Clone project
 ```bash
-git clone [URL_RE_CUA_TRUONG_NHOM]
+git clone https://github.com/dien127/APP-Quan-Ly-Chi-Tieu.git
 cd APP-Quan-Ly-Chi-Tieu
+```
+
+### 3. Cài đặt dependencies
+```bash
 npm install
 ```
 
-### 3. Cấu hình Biến môi trường (Environment Variables)
-Sao chép tệp mẫu và điền thông tin của bạn:
-```bash
-cp .env.example .env
+### 4. Cấu hình biến môi trường
+Tạo file `.env` tại thư mục gốc từ file `.env.example`:
+```env
+DATABASE_URL="postgres://..."
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+GEMINI_API_KEY="your-api-key"
 ```
-*   `DATABASE_URL`: Đường dẫn kết nối PostgreSQL.
-*   `NEXTAUTH_SECRET`: Chạy `openssl rand -base64 32` để tạo mã bảo mật.
-*   `GEMINI_API_KEY`: Lấy key từ [Google AI Studio](https://aistudio.google.com/).
 
-### 4. Thiết lập Cơ sở dữ liệu (Prisma)
-Đẩy cấu trúc bảng lên DB của bạn:
+### 5. Khởi tạo Database
 ```bash
 npx prisma db push
-# Hoặc chạy migration nếu cần
-# npx prisma migrate dev --name init
 ```
 
-### 5. Chạy dự án
+### 6. Chạy môi trường phát triển
 ```bash
 npm run dev
 ```
-Truy cập: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📂 Cấu trúc thư mục (Folder Structure)
+## 📂 Cấu trúc thư mục
 
-*   `src/app`: Định tuyến App Router.
-    *   `(dashboard)`: Toàn bộ trang chức năng chính (auth-protected).
-    *   `(auth)`: Trang Đăng nhập/Đăng ký.
-    *   `api`: Các Endpoint server-side (AI analyze, Auth API).
-    *   `actions`: Server Actions (Cấp độ logic DB).
-*   `src/components`: Các thành phần giao diện tái sử dụng.
-*   `src/lib`: Cấu hình Prisma, Auth, Utils.
-*   `prisma`: Schema định nghĩa cơ sở dữ liệu.
-*   `public`: Tài sản tĩnh, Icons PWA, Manifest.
-
----
-
-## 🤝 Quy trình phát triển (Backend Patterns)
-
-*   **Server Actions**: Luôn sử dụng Server Actions cho các thao tác CRUD và Transaction phức tạp (đặt tại `src/app/actions`).
-*   **Type Safety**: Luôn định nghĩa types cho dữ liệu trả về từ DB.
-*   **UI Consistency**: Sử dụng hệ thống shadcn và theme-tokens có sẵn trong `index.css`.
-*   **Auth**: Luôn bảo vệ Route trong file `middleware.ts` (nếu cần) hoặc kiểm tra `auth()` trong layout/page.
+```text
+APP-Quan-Ly-Chi-Tieu/
+├── prisma/             # Cấu hình Schema & Migrations
+├── public/             # Assets tĩnh, icons, banner
+├── src/
+│   ├── app/            # Next.js App Router (Pages & Actions)
+│   ├── components/     # UI Components (Custom & Shadcn)
+│   ├── hooks/          # Custom Hooks (use-toast, etc.)
+│   ├── lib/            # Shared Utilities (Prisma, Auth)
+│   ├── types/          # TypeScript Definitions
+│   └── proxy.ts        # Middleware & Auth logic
+├── .gitignore          # Cấu hình bỏ qua các file không cần thiết
+├── package.json        # Dependencies & Scripts
+└── README.md           # Tài liệu hướng dẫn dự án
+```
 
 ---
 
-## 👥 Nhóm phát triển (The Team)
+## 👥 Nhóm thực hiện - Nhóm 05 (Tất Tay Ra Trường)
 
-Dự án được khởi tạo và xây dựng kiến trúc bởi **[Tên Của Bạn]**.
-Các thành viên tiếp tục phát triển:
-1.  **Thành viên 1**
-2.  **Thành viên 2**
-3.  **Thành viên 3**
-4.  **Thành viên 4**
+| STT | Họ và Tên | Vai trò chính |
+|:---:|:----------|:--------------|
+| 1 | **Hoàng Hữu Điền** | Nhóm trưởng, Backend, Database |
+| 2 | **Ninh Văn Dũng** | UI/UX Designer, Frontend |
+| 3 | **Nguyễn Đình Hào** | Database, Deployment, Auth |
+| 4 | **Báo Ngọc Thiên Bảo** | AI Integration, OCR, Testing |
+| 5 | **Trần Quốc Lâm** | Documentation, PWA, Features |
 
 ---
 
-## 📄 Giấy phép (License)
-Dự án được phát triển nội bộ cho mục đích học tập và công việc nhóm.
+## 📈 Lịch sử phát triển & Cam kết
+
+Dự án được xây dựng với mục tiêu đạt chuẩn **Premium Fintech Application**. Chúng tôi cam kết duy trì mã nguồn sạch, cấu trúc rõ ràng và lịch sử commit logic để phục vụ quá trình bảo trì và phát triển lâu dài.
+
+---
+© 2026 SpendWise Team. Developed for Final Term Project.
