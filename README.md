@@ -2,6 +2,9 @@
 
 ![SpendWise Banner](./public/assets/images/banner.png)
 
+### 🚀 [Trải nghiệm ứng dụng tại đây: spendwise5.vercel.app](https://spendwise5.vercel.app/)
+
+
 SpendWise là một ứng dụng web hiện đại, được thiết kế để giúp cá nhân quản lý tài chính một cách khoa học, hiệu quả và tự động. Ứng dụng tích hợp các công nghệ tiên tiến nhất như Next.js 15, Prisma, OCR (Nhận diện ký tự quang học) và Trí tuệ nhân tạo (Gemini AI).
 
 ---
