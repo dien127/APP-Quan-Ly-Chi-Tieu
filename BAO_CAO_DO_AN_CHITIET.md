@@ -4,12 +4,12 @@
 ---
 
 ## 1. TRANG BÌA
-- **TRƯỜNG:** [TÊN TRƯỜNG CỦA BẠN - VÍ DỤ: ĐẠI HỌC CÔNG NGHỆ ĐỒNG NAI]
+- **TRƯỜNG:** ĐẠI HỌC CÔNG NGHỆ ĐỒNG NAI
 - **KHOA:** CÔNG NGHỆ THÔNG TIN
 - **MÔN HỌC:** PHÁT TRIỂN PHẦN MỀM ỨNG DỤNG
 - **ĐỀ TÀI:** ỨNG DỤNG QUẢN LÝ CHI TIÊU THÔNG MINH SPENDWISE (TÍCH HỢP OCR & AI)
-- **NHÓM THỰC HIỆN:** NHÓM 05 (Tất Tay Ra Trường)
-- **GIẢNG VIÊN HƯỚNG DẪN:** [TÊN THẦY GIÁO]
+- **NHÓM THỰC HIỆN:** NHÓM Tất Tay Ra Trường
+- **GIẢNG VIÊN HƯỚNG DẪN:** Ths. Phạm Đình Lâm
 - **NĂM HỌC:** 2025 - 2026
 
 ---
@@ -221,7 +221,7 @@ Hệ thống vượt qua 100% các kịch bản kiểm thử quan trọng. Đặ
 ## 11. PHỤ LỤC
 - **Link GitHub Repository:** https://github.com/dien127/APP-Quan-Ly-Chi-Tieu
 - **Link Website (Live Demo):** https://spendwise5.vercel.app/
-- **Link Video Demo (YouTube):** [DÁN LINK YOUTUBE SAU KHI QUAY XONG]
+- **Link Video Demo (YouTube):** https://www.youtube.com/watch?v=40bitkXBBRI
 - **Hướng dẫn cài đặt nhanh:** Đọc file README.md trong mã nguồn.
 
 ---

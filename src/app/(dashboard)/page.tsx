@@ -34,17 +34,17 @@ export default async function DashboardPage() {
     return "Chào buổi tối";
   };
 
-  const currentDate = new Intl.DateTimeFormat('vi-VN', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  const currentDate = new Intl.DateTimeFormat('vi-VN', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
   }).format(new Date());
 
   return (
     <div className="flex flex-col space-y-10 pb-10">
       <BudgetAlerts />
-      
+
       {/* Header Chào mừng / Welcome Section */}
       <FadeIn delay={0.05}>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -101,31 +101,31 @@ export default async function DashboardPage() {
 
             <FadeIn delay={0.12} direction="up">
               <div className="glass-card premium-card rounded-3xl p-6 h-full">
-                 <div className="flex justify-between items-start mb-4">
-                    <div className="p-3 bg-primary/10 rounded-2xl text-primary">
-                      <CreditCard size={24} />
-                    </div>
-                    <span className="text-xs font-bold text-muted-foreground uppercase">Ví & Tài khoản</span>
-                 </div>
-                 <p className="text-muted-foreground text-sm font-medium mb-1">Số lượng ví</p>
-                 <h3 className="text-3xl font-extrabold">{walletCount} <span className="text-lg font-normal text-muted-foreground">tài khoản</span></h3>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-3 bg-primary/10 rounded-2xl text-primary">
+                    <CreditCard size={24} />
+                  </div>
+                  <span className="text-xs font-bold text-muted-foreground uppercase">Ví & Tài khoản</span>
+                </div>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Số lượng ví</p>
+                <h3 className="text-3xl font-extrabold">{walletCount} <span className="text-lg font-normal text-muted-foreground">tài khoản</span></h3>
               </div>
             </FadeIn>
 
             <FadeIn delay={0.14} direction="up">
               <div className="glass-card premium-card rounded-3xl p-6 h-full border-rose-500/10">
-                 <div className="flex justify-between items-start mb-4">
-                    <div className="p-3 bg-rose-500/10 rounded-2xl text-rose-500">
-                      <TrendingDown size={24} />
-                    </div>
-                    <span className="text-xs font-bold text-rose-500/70 uppercase">Chi tiêu tháng</span>
-                 </div>
-                 <p className="text-muted-foreground text-sm font-medium mb-1">Tháng hiện tại</p>
-                 <h3 className="text-3xl font-extrabold text-rose-500">{formatCurrency(stats.momStats.currentExpTotal || 0)}</h3>
-                 <div className={`mt-2 flex items-center gap-1 text-xs font-bold ${stats.momStats.expDiffPercent >= 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
-                    {stats.momStats.expDiffPercent >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                    {Math.abs(stats.momStats.expDiffPercent)}% so với tháng trước
-                 </div>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-3 bg-rose-500/10 rounded-2xl text-rose-500">
+                    <TrendingDown size={24} />
+                  </div>
+                  <span className="text-xs font-bold text-rose-500/70 uppercase">Chi tiêu tháng</span>
+                </div>
+                <p className="text-muted-foreground text-sm font-medium mb-1">Tháng hiện tại</p>
+                <h3 className="text-3xl font-extrabold text-rose-500">{formatCurrency(stats.momStats.currentExpTotal || 0)}</h3>
+                <div className={`mt-2 flex items-center gap-1 text-xs font-bold ${stats.momStats.expDiffPercent >= 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                  {stats.momStats.expDiffPercent >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                  {Math.abs(stats.momStats.expDiffPercent)}% so với tháng trước
+                </div>
               </div>
             </FadeIn>
           </div>
@@ -245,8 +245,8 @@ export default async function DashboardPage() {
                             <p className="text-[10px] text-muted-foreground uppercase font-medium">Hoạt động</p>
                           </div>
                           <div className="text-right">
-                             <p className="text-sm font-black text-primary">{formatCurrency(Number(wallet.balance))}</p>
-                             <div className="h-1 w-12 bg-primary/20 rounded-full ml-auto mt-1" />
+                            <p className="text-sm font-black text-primary">{formatCurrency(Number(wallet.balance))}</p>
+                            <div className="h-1 w-12 bg-primary/20 rounded-full ml-auto mt-1" />
                           </div>
                         </div>
                       ))
@@ -270,11 +270,10 @@ export default async function DashboardPage() {
                     ) : (
                       categories.slice(0, 4).map((category) => (
                         <div key={category.id} className="flex items-center p-3 rounded-2xl hover:bg-accent/50 transition-colors">
-                          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-inner ${
-                            category.type === 'INCOME' 
-                              ? 'bg-emerald-500/10 text-emerald-500' 
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-inner ${category.type === 'INCOME'
+                              ? 'bg-emerald-500/10 text-emerald-500'
                               : 'bg-rose-500/10 text-rose-500'
-                          }`}>
+                            }`}>
                             {category.type === 'INCOME' ? <TrendingUp size={24} /> : <TrendingDown size={24} />}
                           </div>
                           <div className="ml-4 flex-1">
@@ -284,7 +283,7 @@ export default async function DashboardPage() {
                             </p>
                           </div>
                           <div className="p-2">
-                             <div className={`h-2 w-2 rounded-full ${category.type === 'INCOME' ? 'bg-emerald-500' : 'bg-rose-500'} animate-pulse`} />
+                            <div className={`h-2 w-2 rounded-full ${category.type === 'INCOME' ? 'bg-emerald-500' : 'bg-rose-500'} animate-pulse`} />
                           </div>
                         </div>
                       ))

@@ -108,7 +108,7 @@ APP-Quan-Ly-Chi-Tieu/
 
 ---
 
-## 👥 Nhóm thực hiện - Nhóm 05 (Tất Tay Ra Trường)
+## 👥 Nhóm thực hiện - Nhóm Tất Tay Ra Trường
 
 | STT | Họ và Tên | Vai trò chính |
 |:---:|:----------|:--------------|
